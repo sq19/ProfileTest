@@ -4,15 +4,21 @@ import { SectionList, Image, StyleSheet, Text, View } from 'react-native';
 import AddMoneyButton from "./AddMoneyButton.js";
 import AddMoneyPage from './AddMoneyPage.js';
 
+var userData = require('../../../data.json');
+
 export default class ExpoConfigView extends React.Component {
   constructor(props) {
     super(props);
     this.handleChange = this.handleChange.bind(this);
-    this.state = {balance: '0'}
+    this.state = {balance: userData.users[0].balance};
   }
 
   handleChange(e) {
     this.setState({balance: e.target.value});
+  }
+
+  addToBalance(evt) {
+    this.setState({balance: this.state.balance + evt.value})
   }
 
   render() {
@@ -69,7 +75,7 @@ export default class ExpoConfigView extends React.Component {
           ListHeaderComponent={ListHeader}
           sections={sections}
         />
-        <AddMoneyPage/>
+        <AddMoneyPage addToBalance={this.addToBalance}/>
       </View>
       // Edit card info page should be added
       // Edit password page should also be added

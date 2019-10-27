@@ -8,9 +8,10 @@ export default function UselessTextInput() {
     <View style={styles.container}>
       <TextInput
         style={styles.textBox}
-        //{clearTextOnFocus(true)}
+        clearTextOnFocus={() => this.setState({text: ' '})}
         onChangeText={text => onChangeText(text)}
         value={value}
+        onSubmitEditing={this.props.setCurrentInputValue(value)}
       />
     </View>
   );
